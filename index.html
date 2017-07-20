@@ -5,5 +5,18 @@
 		<title>tab</title>
 	</head>
 	<body>
+		<script type="text/javascript">
+			window.onload = function(){
+				
+			}
+			function Tab(name){
+				this.name = name;
+			}
+			tab.prototype.change = function(){
+				console.log(this.name);
+			}
+			var t1 = new Tab('Apple');
+			t1.change();
+		</script>
 	</body>
 </html>
