@@ -3,23 +3,54 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>tab</title>
+		<style type="text/css">
+			.tabCon{display: none;}
+			.tabCon:nth-of-type(1){display: block;}
+			#ipt1{color: red;}
+		</style>
 	</head>
 	<body>
 		<div class="tab">
-			
+			<input type="button" name="" id="ipt1" value="选项一" />
+			<input type="button" name="" id="ipt2" value="选项二" />
+			<input type="button" name="" id="ipt3" value="选项三" />
+			<div class="tabCon">
+				1
+			</div>
+			<div class="tabCon">
+				2
+			</div>
+			<div class="tabCon">
+				3
+			</div>
 		</div>
 		<script type="text/javascript">
-			window.onload = function(){
-				
+			var ipt1 = document.getElementById("ipt1");
+			var ipt2 = document.getElementById("ipt2");
+			var ipt3 = document.getElementById("ipt3");
+			
+			var ipts = document.getElementsByTagName('input');
+			var tabCons = document.getElementsByClassName('tabCon');
+			
+			var Tab = {
+				"change" :function(obj,index){
+					for (var i = 0; i< ipts.length;i++) {
+						ipts[i].style.color = 'black';
+						tabCons[i].style.display = 'none';
+					}
+					obj.style.color = 'red';
+					tabCons[index].style.display = 'block';
+				}
 			}
-			function Tab(name){
-				this.name = name;
-			}
-			tab.prototype.change = function(){
-				console.log(this.name);
-			}
-			var t1 = new Tab('Apple');
-			t1.change();
+			ipt1.addEventListener('click',function(){
+				Tab.change(ipt1,0);
+			})
+			ipt2.addEventListener('click',function(){
+				Tab.change(ipt2,1);
+			})
+			ipt3.addEventListener('click',function(){
+				Tab.change(ipt3,2);
+			})
 		</script>
 	</body>
 </html>
