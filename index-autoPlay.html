@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>tab</title>
+		<style type="text/css">
+			.active{
+				background-color: red;
+			}
+			#div1>div,#div2>div{display: none;}
+		</style>
+	</head>
+	<body>
+		<div id="div1">
+			<input type="button" name=""  value="选项一" />
+			<input type="button" name=""  value="选项二" />
+			<input type="button" name=""  value="选项三" />
+			<div style="display: block;">1</div>
+			<div>2</div>
+			<div>3</div>
+		</div>
+		<div id="div2">
+			<input type="button" name=""  value="选项一" />
+			<input type="button" name=""  value="选项二" />
+			<input type="button" name=""  value="选项三" />
+			<div style="display: block;">111</div>
+			<div>222</div>
+			<div>333</div>
+		</div>
+		
+		<script type="text/javascript">
+			
+			window.onload = function(){
+				var t1 = new Tab("div1");
+				t1.init();
+				
+				var t2 = new Tab("div2");
+				t2.init();
+				t2.autoPlay();
+				
+//				new Tab("div1").init();
+			}
+			function Tab(id){
+				this.oParent = document.getElementById(id);
+				this.aInput = this.oParent.getElementsByTagName('input');
+				this.aDiv = this.oParent.getElementsByTagName('div');
+				this.iNow = 0;
+			}
+			Tab.prototype.init = function(){
+				var This = this;
+				for (var i=0;i< this.aInput.length;i++) {
+					this.aInput[i].index = i;
+					this.aInput[i].onclick = function(){
+						This.change(this);
+					};
+				}
+			}
+			Tab.prototype.change = function(obj){
+				for (var i=0;i< this.aInput.length;i++){
+					this.aInput[i].className = '';
+					this.aDiv[i].style.display = 'none';
+				}
+				obj.className = 'active';
+				this.aDiv[obj.index].style.display = 'block';
+			}
+			Tab.prototype.autoPlay = function(){
+				
+				var This = this;
+				
+				setInterval(function(){
+					
+					if (This.iNow == This.aInput.length - 1) {
+						This.iNow = 0;
+					}else{
+						This.iNow++;
+					}
+					
+					for (var i=0;i< This.aInput.length;i++){
+						This.aInput[i].className = '';
+						This.aDiv[i].style.display = 'none';
+					}
+					This.aInput[This.iNow].className = 'active';
+					This.aDiv[This.iNow].style.display = 'block';
+				},3000)
+				
+			}
+		</script>
+	</body>
+</html>
